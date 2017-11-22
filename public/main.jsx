@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import moment from 'moment';
 import { createStore } from 'redux';
 import { mainReducer as reducers } from './reducers';
 import Calendar from './components/Calendar';
@@ -8,7 +9,10 @@ import * as actions from './actions/index';
 
 const store = createStore(reducers, initialState);
 
-const calendar = <Calendar store={store}/>;
+// get the current time;
+var time = moment();
+
+const calendar = <Calendar store={store} date={time}/>;
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

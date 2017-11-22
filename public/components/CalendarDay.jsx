@@ -1,16 +1,9 @@
 import React from 'react';
 import * as actions from '../actions/index.js';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import _ from 'lodash';
 import moment from 'moment';
-import u from './utils';
-
-// proptype checker
-CalendarDay.propTypes = {
-  date: u.propTypeMoment
-  // events array is a property of the calendar
-  events: PropTypes.array
-};
+import * as u from './utils'
 
 export default class CalendarDay extends React.Component {
   constructor (props) {
@@ -44,4 +37,11 @@ export default class CalendarDay extends React.Component {
       </td>
     )
   }
+};
+
+// proptype checker
+CalendarDay.propTypes = {
+  date: u.propTypeMoment,
+  // events array is a property of the calendar
+  events: PropTypes.array
 };

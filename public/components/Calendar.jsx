@@ -1,20 +1,14 @@
 import React from 'react';
-import u from './utils';
-import PropTypes from 'prop-types';
-
-// proptype checker
-Calendar.propTypes = {
-  today: u.propTypeMoment,
-  date: u.propTypeMoment,
-  events: PropTypes.object
-};
+import CalendarMonth from './CalendarMonth';
+import * as initialState from '../initialState';
+import * as PropTypes from 'prop-types';
+import * as u from './utils.js'
 
 export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {adding: false};
+    this.state = initialState;
   }
-
   componentDidMount() {
     this.props.store.subscribe(function () {
       this.setState(this.props.store.getState());
@@ -51,10 +45,8 @@ export default class Calendar extends React.Component {
             </span>
           </caption>
           <CalendarMonth
-            today={this.props.today}
             date={this.props.date}
-            events={this.props.events}
-            recurring={this.props.recurring}
+            events={this.state.events}
             selectDay={this.props.selectDay}
             />
         </table>
@@ -62,3 +54,9 @@ export default class Calendar extends React.Component {
     )
   }
 }
+
+// proptype checker
+Calendar.propTypes = {
+  date: u.propTypeMoment,
+  events: PropTypes.object
+};

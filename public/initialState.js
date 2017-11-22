@@ -1,3 +1,4 @@
 const adding = false;
+const events = [];
 
-export {adding}
+export {adding, events}

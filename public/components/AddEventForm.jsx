@@ -3,12 +3,13 @@ import u from './utils';
 
 export default class AddEventForm extends React.Component {
   constructor (props) {
-
+    super();
   }
 
   // when an event is submitted
   submitForm() {
-
+    var event = {
+    }
   }
 
   // cancel form
@@ -49,7 +50,7 @@ export default class AddEventForm extends React.Component {
 
 // proptype checker
 AddEventForm.propTypes = {
-
+  date: u.propTypeMoment
 }
 
 module.exports = AddEventForm;

@@ -15,9 +15,6 @@ app.set('view engine', 'html');
 // Host static files on URL path
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Use express Router middleware for root path
-// app.use(app.router);
-
 app.get('/', (req, res) => {
   res.render('index');
 });
