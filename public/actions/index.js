@@ -1,7 +1,15 @@
-// sets the date to be added to
-const setDate = (date) => {
+// sets the date to scroll to
+const changeDate = (date) => {
   return {
-    type: 'SETDATE',
+    type: 'CHANGEDATE',
+    date: date
+  }
+}
+
+// sets the day to add to
+const selectDay = (date) => {
+  return {
+    type: 'SELECTDAY',
     date: date
   }
 }
@@ -47,4 +55,4 @@ const addRecipe = (recipeId) => {
   }
 }
 
-export { addEvent, removeEvent, cancelForm, changeForm, addRestaurant, addRecipe };
+export { changeDate, selectDay, addEvent, removeEvent, cancelForm, changeForm, addRestaurant, addRecipe };

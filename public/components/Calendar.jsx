@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarMonth from './CalendarMonth';
+import * as actions from '../actions/index.js';
 import * as initialState from '../initialState';
 import * as PropTypes from 'prop-types';
 import * as u from './utils.js'
@@ -8,6 +9,9 @@ export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = initialState;
+    this.jumpToToday = this.jumpToToday.bind(this);
+    this.prevMonth = this.prevMonth.bind(this);
+    this.nextMonth = this.nextMonth.bind(this);
   }
   componentDidMount() {
     this.props.store.subscribe(function () {
@@ -16,21 +20,21 @@ export default class Calendar extends React.Component {
   }
   // allows user to jump to today
   jumpToToday() {
-
+    var today = this.props.date;
+    this.props.store.dispatch(actions.changeDate(today));
   }
   // allows jumping to prev month
   prevMonth() {
-
+    var lastMonth = this.props.date.clone().subtract(1, 'month');
+    this.props.store.dispatch(actions.changeDate(lastMonth));
   }
   // allows jumping to next month
   nextMonth() {
-
-  }
-  // allows users to zoom in certain day
-  selectDay() {
-
+    var nextMonth = this.props.date.clone().add(1, 'month');
+    this.props.store.dispatch(actions.changeDate(nextMonth));
   }
   render() {
+    var store = this.props.store;
     return (
       <div className="container">
         <table className="table">
@@ -45,9 +49,9 @@ export default class Calendar extends React.Component {
             </span>
           </caption>
           <CalendarMonth
+            store = {store}
             date={this.props.date}
             events={this.state.events}
-            selectDay={this.props.selectDay}
             />
         </table>
       </div>

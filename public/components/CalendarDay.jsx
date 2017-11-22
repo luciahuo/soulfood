@@ -13,7 +13,8 @@ export default class CalendarDay extends React.Component {
   }
 
   onDayClick() {
-    this.props.store.dispatch(actions.setDate(this.props.date));
+    // pass in the current date
+    this.props.store.dispatch(actions.selectDay(this.props.date));
   }
 
   render() {
