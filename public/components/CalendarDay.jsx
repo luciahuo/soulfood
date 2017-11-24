@@ -31,12 +31,13 @@ export default class CalendarDay extends React.Component {
           className={className}>
           {date.format('D')}
           {events.map(function(event, i) {
-            var style = {color: event.color};
+            var titlestyle = {color: event.color};
             return (
-              <div className="event"
-                key={i} style={style}
+              <div className="event" key={i} style={titlestyle}
               >
               {event.title}
+              {' '}
+              {event.time}
               </div>
             );
           })}

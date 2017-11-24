@@ -89,5 +89,3 @@ export default class AddEventForm extends React.Component {
 AddEventForm.propTypes = {
   date: u.propTypeMoment
 }
-
-module.exports = AddEventForm;

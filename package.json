@@ -52,6 +52,7 @@
     "react-dom": "*",
     "react-redux": "*",
     "reactify": "*",
-    "redux": "*"
+    "redux": "*",
+    "yelp": "^1.0.2"
   }
 }

@@ -37,7 +37,7 @@ const mainReducer = (state, action) => {
 
     // remove an event
     case 'REMOVEEVENT': {
-
+      
     }
 
     // cancel a from submission
