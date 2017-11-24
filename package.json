@@ -42,7 +42,7 @@
     "grunt-cli": "*",
     "gruntify-eslint": "*",
     "gulp-babel": "^6.1.2",
-    "jquery": "*",
+    "jquery": "^3.2.1",
     "lodash": "*",
     "moment": "^2.19.2",
     "prop-types": "^15.6.0",

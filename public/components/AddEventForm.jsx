@@ -17,6 +17,8 @@ export default class AddEventForm extends React.Component {
     var title = $('#title').val();
     var time = $('#time').val();
     var color = $('#color').val();
+    var store = this.props.store;
+    var date = this.props.date;
     if (!title) {
       alert("title is required");
     } else {
@@ -26,9 +28,7 @@ export default class AddEventForm extends React.Component {
         color: color
       }
       // submit the form
-      this.props.store.dispatch(actions.submitForm(event));
-      // close the form
-      this.props.store.dispatch(actions.closeForm());
+      this.props.store.dispatch(actions.addEvent(date, event, store));
     }
   }
 

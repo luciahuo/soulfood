@@ -15,10 +15,12 @@ const selectDay = (date) => {
   }
 }
 
-const addEvent = (eventInfo) => {
+const addEvent = (date, eventInfo, store) => {
   return {
     type: 'ADDEVENT',
-    info: eventInfo
+    date: date,
+    info: eventInfo,
+    store: store
   };
 };
 

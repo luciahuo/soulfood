@@ -27,7 +27,12 @@ const mainReducer = (state, action) => {
 
     // add an event
     case 'ADDEVENT': {
-
+      let key = action.date.format('YYYYMMDD');
+      let store = action.store;
+      let event = action.info;
+      state.events[key] = state.events[key] || [];
+      state.events[key].push(event);
+      redraw(state, store);
     }
 
     // remove an event
@@ -37,7 +42,7 @@ const mainReducer = (state, action) => {
 
     // cancel a from submission
     case 'CLOSEFORM': {
-
+      return _.assign({}, state, {adding: false});
     }
 
     // change a form
