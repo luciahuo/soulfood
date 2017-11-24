@@ -13,6 +13,7 @@ export default class CalendarMonth extends React.Component {
     var date = this.props.date;
     var events = this.props.events;
     var store = this.props.store;
+    var today = this.props.today;
     // set start to the start of the current month
     var start = date.clone().startOf('month');
     // get the number of days in the month
@@ -31,6 +32,7 @@ export default class CalendarMonth extends React.Component {
         );
         return <CalendarDay
           store={store}
+          today={today}
           key={n + 1}
           date={date}
           events={dayEvents}

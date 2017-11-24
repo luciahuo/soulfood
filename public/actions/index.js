@@ -1,8 +1,9 @@
 // sets the date to scroll to
-const changeDate = (date) => {
+const changeDate = (date, store) => {
   return {
     type: 'CHANGEDATE',
-    date: date
+    date: date,
+    store: store
   }
 }
 
@@ -28,9 +29,9 @@ const removeEvent = (eventName) => {
   }
 }
 
-const cancelForm = () => {
+const closeForm = () => {
   return {
-    type: 'CANCELFORM'
+    type: 'CLOSEFORM'
   }
 }
 
@@ -55,4 +56,4 @@ const addRecipe = (recipeId) => {
   }
 }
 
-export { changeDate, selectDay, addEvent, removeEvent, cancelForm, changeForm, addRestaurant, addRecipe };
+export { changeDate, selectDay, addEvent, removeEvent, closeForm, changeForm, addRestaurant, addRecipe };

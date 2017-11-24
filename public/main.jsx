@@ -14,7 +14,7 @@ const store = createStore(reducers, initialState);
 // get the current time;
 var time = moment();
 
-const calendar = <Calendar store={store} date={time}/>;
+const calendar = <Calendar store={store} date={time} today={moment()} events={initialState.events}/>;
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

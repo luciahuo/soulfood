@@ -21,9 +21,14 @@ export default class CalendarDay extends React.Component {
     var today = this.props.today;
     var date = this.props.date;
     var events = this.props.events || [];
+    var className = "";
+    // make className today if equal to date
+    if (today.isSame(date, 'day')) {
+      className = "today"
+    }
     return (
       <td onClick={this.onDayClick}
-          className='CalendarDay'>
+          className={className}>
           {date.format('D')}
           {events.map(function(event, i) {
             var style = {color: event.color};

@@ -7,7 +7,7 @@ import * as u from './utils.js'
 
 export default class Calendar extends React.Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = initialState;
     this.jumpToToday = this.jumpToToday.bind(this);
     this.prevMonth = this.prevMonth.bind(this);
@@ -20,18 +20,23 @@ export default class Calendar extends React.Component {
   }
   // allows user to jump to today
   jumpToToday() {
-    var today = this.props.date;
-    this.props.store.dispatch(actions.changeDate(today));
+    var today = this.props.today;
+    var store = this.props.store;
+    this.props.store.dispatch(actions.changeDate(today, store));
   }
   // allows jumping to prev month
   prevMonth() {
     var lastMonth = this.props.date.clone().subtract(1, 'month');
-    this.props.store.dispatch(actions.changeDate(lastMonth));
+    // pass in the store
+    var store = this.props.store;
+    this.props.store.dispatch(actions.changeDate(lastMonth, store));
   }
   // allows jumping to next month
   nextMonth() {
     var nextMonth = this.props.date.clone().add(1, 'month');
-    this.props.store.dispatch(actions.changeDate(nextMonth));
+    // pass in the store
+    var store = this.props.store;
+    this.props.store.dispatch(actions.changeDate(nextMonth, store));
   }
   render() {
     var store = this.props.store;
@@ -50,6 +55,7 @@ export default class Calendar extends React.Component {
           </caption>
           <CalendarMonth
             store = {store}
+            today={this.props.today}
             date={this.props.date}
             events={this.state.events}
             />
@@ -61,6 +67,7 @@ export default class Calendar extends React.Component {
 
 // proptype checker
 Calendar.propTypes = {
+  today: u.propTypeMoment,
   date: u.propTypeMoment,
-  events: PropTypes.object
+  events: PropTypes.array
 };
