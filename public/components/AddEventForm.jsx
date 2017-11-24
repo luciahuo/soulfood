@@ -1,12 +1,14 @@
 import React from 'react';
-import u from './utils';
+import * as u from './utils';
+import * as actions from '../actions'
 
 export default class AddEventForm extends React.Component {
   constructor (props) {
     super();
+    this.state = {error: false};
     this.submitForm = this.submitForm.bind(this);
     this.cancel = this.cancel.bind(this);
-    this.changeForm = this.changedForm.bind(this);
+    this.changeForm = this.changeForm.bind(this);
   }
 
   // when an event is submitted
@@ -36,7 +38,7 @@ export default class AddEventForm extends React.Component {
   }
 
   // make a change to a form
-  changedForm() {
+  changeForm() {
     this.props.store.dispatch(actions.changeForm());
   }
 
@@ -45,7 +47,7 @@ export default class AddEventForm extends React.Component {
       <div className="add-event-overlay">
         <form className="add_event-form"
           onSubmit={this.submitForm}
-          onChange={this.changedForm}
+          onChange={this.changeForm}
           >
           <p className="form-title">
             {this.props.date.format('ddd D MMM YYYY')}

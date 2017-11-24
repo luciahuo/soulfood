@@ -39,7 +39,6 @@ export default class CalendarMonth extends React.Component {
         />;
       })
     );
-
     var weeks = u.chunk(7, days);
     var weekdays = [
       'Mon', 'Tue', 'Wed',

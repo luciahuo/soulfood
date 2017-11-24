@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarMonth from './CalendarMonth';
+import AddEventForm from './AddEventForm';
 import * as actions from '../actions/index.js';
 import * as initialState from '../initialState';
 import * as PropTypes from 'prop-types';
@@ -40,6 +41,9 @@ export default class Calendar extends React.Component {
   }
   render() {
     var store = this.props.store;
+    var today = this.props.today;
+    var events = this.state.events;
+    var date = this.props.date;
     return (
       <div className="container">
         <table className="table">
@@ -50,16 +54,22 @@ export default class Calendar extends React.Component {
               onClick={this.nextMonth}>next</button>
             <span className="clickable"
               onClick={this.jumpToToday}>
-              {this.props.date.format("MMMM YYYY")}
+              {date.format("MMMM YYYY")}
             </span>
           </caption>
           <CalendarMonth
-            store = {store}
-            today={this.props.today}
-            date={this.props.date}
-            events={this.state.events}
+            store={store}
+            today={today}
+            date={date}
+            events={events}
             />
         </table>
+        {this.state.adding &&
+          <AddEventForm
+            store={store}
+            date={this.state.adding}
+          />
+        }
       </div>
     )
   }
