@@ -1,41 +1,48 @@
 import React from 'react';
 import zomato from 'zomato.js';
 import querystring from 'querystring';
-import axios from 'axios'
+import SearchResults from './SearchResults';
 
 export default class SearchYelp extends React.Component {
   constructor(props) {
-    var apiKey;
     super();
-    $.ajax({
-      type: 'GET',
-      url: '/restoKey',
-      success: function (data) {
-        console.log(data);
-        apiKey = data;
-      },
-      error: function(jqXHR, textStatus, err) {
-        alert('text status '+textStatus+', err '+err)
-      }
+    var that = this;
+    // state for keeping track of search results
+    this.state = {
+      searchText: '',
+      searchResults: []
+    }
+    $.get("/restoKey", function (data) {
+      that.apiKey = data;
     });
-    this.zomato = new zomato(apiKey);
-    // get a token
+    this.zomato = new zomato(this.apiKey);
     this.submitForm = this.submitForm.bind(this);
     this.cancel = this.cancel.bind(this);
-    $('#submit').click(this.submitForm);
   }
   submitForm(e) {
+    // prevent the browser from reloading
     e.preventDefault();
     var keyword = $('#keyword').val();
     if (!keyword) {
       alert('keyword is required');
     } else {
+      var that = this
+      this.setState({searchText: $('#keyword').val()});
+      // zomato search
+      var cb = (data) => {
+        if (data) {
+          that.setState({searchResults: data});
+        } else {
+          alert('there are no results for your query')
+        }
+      }
       this.zomato
       .search({
         q: keyword,
         count: 10
       })
       .then(function(data) {
+        cb(data);
       })
       .catch(function(err) {
         console.error(err);
@@ -46,15 +53,14 @@ export default class SearchYelp extends React.Component {
 
   }
   render() {
-    const {handleSubmit} = this.props;
+    var results = this.state.searchResults;
     return (
       <div className="searchResto">
         <form className="search_restaurant_form"
-            id="mySearch"
             onSubmit={this.submitForm}
           >
           <p className="form-title">
-            Search Restaurants
+            Search Restaurants Near You
           </p>
           <label>
             Keyword
@@ -65,6 +71,7 @@ export default class SearchYelp extends React.Component {
             <button onClick={this.cancel}>Cancel</button>
           </div>
         </form>
+        <SearchResults searchResults={results}/>
       </div>
     );
   }
