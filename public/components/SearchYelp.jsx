@@ -5,8 +5,20 @@ import axios from 'axios'
 
 export default class SearchYelp extends React.Component {
   constructor(props) {
+    var apiKey;
     super();
-    this.zomato = new zomato(process.env.APIKey);
+    $.ajax({
+      type: 'GET',
+      url: '/restoKey',
+      success: function (data) {
+        console.log(data);
+        apiKey = data;
+      },
+      error: function(jqXHR, textStatus, err) {
+        alert('text status '+textStatus+', err '+err)
+      }
+    });
+    this.zomato = new zomato(apiKey);
     // get a token
     this.submitForm = this.submitForm.bind(this);
     this.cancel = this.cancel.bind(this);
@@ -24,7 +36,6 @@ export default class SearchYelp extends React.Component {
         count: 10
       })
       .then(function(data) {
-        console.log(data);
       })
       .catch(function(err) {
         console.error(err);

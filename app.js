@@ -2,6 +2,8 @@ import express from 'express';
 import path from 'path';
 import ejs from 'ejs';
 
+require('dotenv').config();
+
 let app = express();
 const port = process.env.PORT || 3000;
 
@@ -17,6 +19,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.render('index');
+});
+
+// endpoint for getting the Zomato API key
+app.get('/restoKey', (req, res) => {
+  console.log(process.env.API_Key);
+  res.send(process.env.API_Key);
 });
 
 // Start server
