@@ -12,7 +12,8 @@ export default class AddEventForm extends React.Component {
   }
 
   // when an event is submitted
-  submitForm() {
+  submitForm(e) {
+    e.preventDefault();
     // get the appropriate values
     var title = $('#title').val();
     var time = $('#time').val();

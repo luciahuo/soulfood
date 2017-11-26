@@ -20,7 +20,25 @@ export default class SearchRecipe extends React.Component {
   }
   submitForm(e) {
     e.preventDefault();
-
+    var ingredients = $('#ingredients').val();
+    if (!ingredients) {
+      alert('please enter ingredients');
+    } else {
+      ingredients = ingredients.split(" ");
+      // construct the querystring
+      var q = buildQuery(ingredients);
+      var data = {
+        q: q,
+        app_id: this.recipeId,
+        app_key: this.recipeKey
+      }
+      $.get(
+        'https://api.edamam.com/search',
+        data
+      ).done(function (data) {
+        console.log(data);
+      });
+    }
   }
   cancel() {
 
@@ -62,4 +80,18 @@ export default class SearchRecipe extends React.Component {
       </div>
     )
   }
+}
+
+const buildQuery = (array) => {
+  var length = array.length;
+  var string = array[0];
+  while (length != 1) {
+    string = string + '%26' + array[i];
+    length -= 1;
+  }
+  if (array.length != 1) {
+    // append the last character
+    string = string + array[array.length - 1];
+  }
+  return string;
 }

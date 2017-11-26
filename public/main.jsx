@@ -5,7 +5,6 @@ import moment from 'moment';
 import { createStore } from 'redux';
 import { mainReducer as reducers } from './reducers';
 import Calendar from './components/Calendar';
-import SearchYelp from './components/SearchYelp';
 import * as initialState from './initialState';
 import * as actions from './actions/index';
 
@@ -15,15 +14,10 @@ const store = createStore(reducers, initialState);
 var time = moment();
 
 const calendar = <Calendar store={store} date={time} today={moment()} events={initialState.events}/>;
-const searchYelp = <SearchYelp/>
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     calendar,
     document.getElementById('container')
-  );
-  ReactDOM.render(
-    searchYelp,
-    document.getElementById('search')
   );
 });

@@ -22,19 +22,17 @@ app.get('/', (req, res) => {
 });
 
 // endpoint for getting the Zomato API key
-app.get('/restoKey', (req, res) => {
-  console.log(process.env.API_KEY)
-  res.send(process.env.API_KEY);
+app.get('/restaurantKey', (req, res) => {
+  res.send({key: process.env.API_KEY});
 });
 
 // endpoint for getting the Edamam API key
 app.get('/recipeKey', (req, res) => {
-  console.log(process.env.APP_ID);
   res.send({
     id: process.env.APP_ID,
     key: process.env.APP_KEY
-  })
-})
+  });
+});
 
 // Start server
 app.listen(app.get('port'), () => {

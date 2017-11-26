@@ -5,6 +5,9 @@ import * as actions from '../actions/index.js';
 import * as initialState from '../initialState';
 import * as PropTypes from 'prop-types';
 import * as u from './utils.js'
+import querystring from 'query-string';
+import SearchYelp from './SearchYelp';
+import SearchRecipe from './SearchRecipe';
 
 export default class Calendar extends React.Component {
   constructor(props) {
@@ -13,6 +16,8 @@ export default class Calendar extends React.Component {
     this.jumpToToday = this.jumpToToday.bind(this);
     this.prevMonth = this.prevMonth.bind(this);
     this.nextMonth = this.nextMonth.bind(this);
+    this.searchRestaurants = this.searchRestaurants.bind(this);
+    this.searchRecipes = this.searchRecipes.bind(this);
   }
   componentDidMount() {
     this.props.store.subscribe(function () {
@@ -39,6 +44,12 @@ export default class Calendar extends React.Component {
     var store = this.props.store;
     this.props.store.dispatch(actions.changeDate(nextMonth, store));
   }
+  searchRestaurants() {
+    this.props.store.dispatch(actions.searchRestaurants());
+  }
+  searchRecipes() {
+    this.props.store.dispatch(actions.searchRecipes());
+  }
   render() {
     var store = this.props.store;
     var today = this.props.today;
@@ -64,11 +75,21 @@ export default class Calendar extends React.Component {
             events={events}
             />
         </table>
+        <button className="searchRestaurants"
+          onClick={this.searchRestaurants}>Search Restaurants</button>
+        <button className="searchRecipes"
+          onClick={this.searchRecipes}>Search Recipes</button>
         {this.state.adding &&
           <AddEventForm
             store={store}
             date={this.state.adding}
           />
+        }
+        {this.state.restoSearch &&
+          <SearchYelp/>
+        }
+        {this.state.recipeSearch &&
+          <SearchRecipe/>
         }
       </div>
     )

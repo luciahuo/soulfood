@@ -44,18 +44,16 @@ const changeForm = (eventName) => {
   }
 }
 
-const addRestaurant = (restaurantId) => {
+const searchRestaurants = () => {
   return {
-    type: 'ADDRESTAURANT',
-    id: restaurantId
+    type: 'SEARCHRESTAURANTS'
   }
 }
 
-const addRecipe = (recipeId) => {
+const searchRecipes = () => {
   return {
-    type: 'ADDRECIPE',
-    id: recipeId
+    type: 'SEARCHRECIPES'
   }
 }
 
-export { changeDate, selectDay, addEvent, removeEvent, closeForm, changeForm, addRestaurant, addRecipe };
+export { changeDate, selectDay, addEvent, removeEvent, closeForm, changeForm, searchRestaurants, searchRecipes};

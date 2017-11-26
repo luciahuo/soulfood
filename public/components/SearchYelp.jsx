@@ -12,8 +12,8 @@ export default class SearchYelp extends React.Component {
       searchText: '',
       searchResults: []
     }
-    $.get("/restoKey", function (data) {
-      that.apiKey = data;
+    $.get('/restaurantKey', function (data) {
+      that.apiKey = data.key;
     });
     this.zomato = new zomato(this.apiKey);
     this.submitForm = this.submitForm.bind(this);

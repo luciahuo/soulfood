@@ -37,7 +37,7 @@ const mainReducer = (state, action) => {
 
     // remove an event
     case 'REMOVEEVENT': {
-      
+
     }
 
     // cancel a from submission
@@ -51,13 +51,13 @@ const mainReducer = (state, action) => {
     }
 
     // add a restaurant to the calendar
-    case 'ADDRESTAURANT': {
-
+    case 'SEARCHRESTAURANTS': {
+      return _.assign({}, state, {adding: false, recipeSearch: false, restoSearch: true});
     }
 
     // add a new recipe
-    case 'ADDRECIPE': {
-
+    case 'SEARCHRECIPES': {
+      return _.assign({}, state, {adding: false, restoSearch: false, recipeSearch: true});
     }
   }
   return state;
