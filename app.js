@@ -1,11 +1,14 @@
+require('dotenv').config();
 import express from 'express';
 import path from 'path';
 import ejs from 'ejs';
 
-require('dotenv').config();
-
 let app = express();
 const port = process.env.PORT || 3000;
+
+var cookieSession = require('cookie-session');
+var bodyParser = require('body-parser');
+var User = require('./User');
 
 app.set('port', port);
 
@@ -14,11 +17,45 @@ app.set('views', __dirname + '/views');
 app.engine('html', ejs.__express);
 app.set('view engine', 'html');
 
+app.use(cookieSession({
+  secret: 'SHHKey'
+}));
+
+// use the bodyparser
+app.use(bodyParser.urlencoded({extended: false}));
+
 // Host static files on URL path
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.render('index');
+// endpoint for front page
+app.get('/', (req,res) => {
+  // see if the user is a returning user
+  if (req.session.username && req.session.username !== '') {
+    res.redirect('/protected');
+  } else {
+    res.redirect('/login');
+  }
+});
+
+// login
+app.post('/login', (req,res) => {
+  username = req.body.username;
+  password = req.body.password;
+  User.checkIfExisting(user, password, function(err, isRight) {
+    if (err) {
+      res.send('Error!' + err);
+    } else {
+      if (isRight) {
+        req.session.username = username;
+        res.redirect()
+      }
+    }
+  })
+});
+
+app.get('/logout', function(req, res) {
+  req.session.username = '';
+  res.render('logout');
 });
 
 // endpoint for getting the Zomato API key
@@ -32,6 +69,15 @@ app.get('/recipeKey', (req, res) => {
     id: process.env.APP_ID,
     key: process.env.APP_KEY
   });
+});
+
+// protected page
+app.get('/protected', (req, res) => {
+  if (!req.session.username || req.session.username == '') {
+    res.send('this page is protected!');
+  } else {
+    res.render('index', {username: req.session.username});
+  }
 });
 
 // Start server
