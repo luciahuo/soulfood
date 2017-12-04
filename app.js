@@ -1,4 +1,5 @@
 require('dotenv').config();
+import uuid from 'node-uuid';
 import express from 'express';
 import path from 'path';
 import ejs from 'ejs';
@@ -17,33 +18,45 @@ app.set('views', __dirname + '/views');
 app.engine('html', ejs.__express);
 app.set('view engine', 'html');
 
+// Host static files on URL path
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Generate a random cookie secret for this app
+var generateCookieSecret = function () {
+  return 'iamasecret' + uuid.v4();
+};
+// cookie secret
+var cookieSecret = generateCookieSecret();
+
+// adding the cookie session to the app
 app.use(cookieSession({
-  secret: 'SHHKey'
+  secret: cookieSecret
 }));
 
 // use the bodyparser
 app.use(bodyParser.urlencoded({extended: false}));
 
-// Host static files on URL path
-app.use(express.static(path.join(__dirname, 'public')));
-
 // endpoint for front page
 app.get('/', (req,res) => {
   // see if the user is a returning user
   if (req.session.username && req.session.username !== '') {
-    res.redirect('/protected');
+    res.redirect('protected');
   } else {
-    res.redirect('/login');
+    res.redirect('login');
   }
 });
 
-// login
+// the login handlers
+app.get('/login', (req,res) => {
+  res.render('login');
+});
+
 app.post('/login', (req,res) => {
-  username = req.body.username;
-  password = req.body.password;
-  User.checkIfExisting(user, password, function(err, isRight) {
+  var username = req.body.username;
+  var password = req.body.password;
+  User.checkIfExisting(username, password, function(err, isRight) {
     if (err) {
-      res.send('Error!' + err);
+      res.send('Error: ' + err);
     } else {
       if (isRight) {
         req.session.username = username;
@@ -53,6 +66,22 @@ app.post('/login', (req,res) => {
   })
 });
 
+// register
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+
+app.post('/register', (req, res) => {
+  User.addUser(req.body.username, req.body.password, function(err) {
+    if (err) {
+      res.send('error' + err);
+    } else {
+      res.redirect('index');
+    }
+  });
+});
+
+// logout
 app.get('/logout', function(req, res) {
   req.session.username = '';
   res.render('logout');

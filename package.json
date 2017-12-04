@@ -51,6 +51,7 @@
     "lodash": "*",
     "moment": "^2.19.2",
     "mongoose": "^4.13.6",
+    "node-uuid": "^1.4.8",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.1",
     "react": "*",
