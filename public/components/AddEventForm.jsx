@@ -48,7 +48,6 @@ export default class AddEventForm extends React.Component {
       <div className="add-event-overlay">
         <form className="add_event-form"
           onSubmit={this.submitForm}
-          onChange={this.changeForm}
           >
           <p className="form-title">
             {this.props.date.format('ddd D MMM YYYY')}

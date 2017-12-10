@@ -55,11 +55,11 @@ export default class SearchRecipe extends React.Component {
           </p>
           <label>
             Ingredients
-            <input type="text" id="ingredients"/>
+            <input style={{fontSize: '18px', width: '100%', background: 'none'}} type="text" id="ingredients"/>
           </label>
           <label>
             Max Number of Ingredients
-            <input type="number" id="maxNumIngredients"/>
+            <input style={{fontSize: '18px', width: '100%', background: 'none'}} type="number" id="maxNumIngredients"/>
           </label>
           <label>
             Diet

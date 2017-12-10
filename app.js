@@ -60,7 +60,7 @@ app.post('/login', (req,res) => {
     } else {
       if (isRight) {
         req.session.username = username;
-        res.redirect()
+        res.redirect('/protected');
       }
     }
   })
@@ -76,7 +76,8 @@ app.post('/register', (req, res) => {
     if (err) {
       res.send('error' + err);
     } else {
-      res.redirect('index');
+      req.session.username = req.body.username;
+      res.redirect('/protected');
     }
   });
 });

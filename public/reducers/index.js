@@ -42,27 +42,23 @@ const mainReducer = (state, action) => {
 
     // cancel a from submission
     case 'CLOSEFORM': {
-      return _.assign({}, state, {adding: false});
-    }
-
-    // change a form
-    case 'CHANGEFORM': {
-
+      return _.assign({}, state, {form: false});
     }
 
     // add a restaurant to the calendar
     case 'SEARCHRESTAURANTS': {
-      return _.assign({}, state, {adding: false, recipeSearch: false, restoSearch: true});
+      var date = action.date;
+      return _.assign({}, state, {adding: date, form: false, recipeSearch: false, restoSearch: true});
     }
 
     // add a new recipe
     case 'SEARCHRECIPES': {
-      return _.assign({}, state, {adding: false, restoSearch: false, recipeSearch: true});
+      var date = action.date;
+      return _.assign({}, state, {adding: date, form: false, restoSearch: false, recipeSearch: true});
     }
   }
   return state;
 };
-
 
 const readDate = (state, store) => {
   var ymd = window.location.hash.substring(1);

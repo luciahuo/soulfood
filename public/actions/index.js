@@ -37,23 +37,18 @@ const closeForm = () => {
   }
 }
 
-// action that allows users to edit events
-const changeForm = (eventName) => {
+const searchRestaurants = (date) => {
   return {
-    type: 'CHANGEFORM'
-  }
-}
-
-const searchRestaurants = () => {
-  return {
+    date: date,
     type: 'SEARCHRESTAURANTS'
   }
 }
 
-const searchRecipes = () => {
+const searchRecipes = (date) => {
   return {
+    date: date,
     type: 'SEARCHRECIPES'
   }
 }
 
-export { changeDate, selectDay, addEvent, removeEvent, closeForm, changeForm, searchRestaurants, searchRecipes};
+export { changeDate, selectDay, addEvent, removeEvent, closeForm, searchRestaurants, searchRecipes};

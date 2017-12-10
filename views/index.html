@@ -5,97 +5,12 @@
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="/build/main.js"></script>
-<style type="text/css">
-body {
-    font-family: monospace;
-}
-.table {
-    border-collapse: collapse;
-}
-.table caption {
-    font-size: 1.5rem;
-    padding: 10px;
-}
-.table button {
-    font-size: 1rem;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 3px;
-    cursor: pointer;
-}
-.left {
-    float: left;
-}
-.right {
-    float: right;
-}
-.clickable {
-    cursor: pointer;
-}
-.table th {
-    border: 1px solid black;
-    font-weight: bold;
-    text-align: left;
-    padding: 5px;
-}
-.table td {
-    border: 1px solid black;
-    padding: 5px;
-    height: 75px;
-    width: 75px;
-    vertical-align: top;
-}
-.table td.today {
-    border-color: darkred;
-    border-width: 2px;
-    font-weight: bold;
-    color: darkred;
-    padding: 4px;
-}
-.container {
-    position: relative;
-    padding: 10px;
-}
-.add-event-form {
-    margin: 50px auto;
-    padding: 10px;
-    width: 50%;
-    display: block;
-    background: #fff;
-    border: 1px solid #333;
-}
-.form-title {
-    text-align: center;
-}
-.add-event-form label {
-    display: block;
-    clear: right;
-    padding: 5px;
-    margin-bottom: 10px;
-}
-.add-event-form input,
-.add-event-form select {
-    width: 60%;
-    float: right;
-}
-.form-controls {
-    margin-top: 20px;
-    text-align: center;
-}
-.form-controls button {
-    margin: 0 5px;
-    padding: 5px;
-}
-.error {
-    color: darkred;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
 <body>
-  <h1 class="title">Welcome To SoulFood, <%= username %></h1>
-  <a href = "/logout">Logout</a>
-  <div id="container" align="left">
+  <a class="logout" href = "/logout">Logout</a>
+  <div id="container">
   </div>
-  <div id="search" align="right">
+  <div id="search">
   </div>
 </body>
 </html>

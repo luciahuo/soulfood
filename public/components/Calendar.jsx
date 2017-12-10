@@ -20,6 +20,7 @@ export default class Calendar extends React.Component {
     this.searchRecipes = this.searchRecipes.bind(this);
   }
   componentDidMount() {
+    // rerender the component whenever there is a change to the state of the page
     this.props.store.subscribe(function () {
       this.setState(this.props.store.getState());
     }.bind(this));
@@ -45,10 +46,10 @@ export default class Calendar extends React.Component {
     this.props.store.dispatch(actions.changeDate(nextMonth, store));
   }
   searchRestaurants() {
-    this.props.store.dispatch(actions.searchRestaurants());
+    this.props.store.dispatch(actions.searchRestaurants(this.props.date));
   }
   searchRecipes() {
-    this.props.store.dispatch(actions.searchRecipes());
+    this.props.store.dispatch(actions.searchRecipes(this.props.date));
   }
   render() {
     var store = this.props.store;
@@ -57,11 +58,12 @@ export default class Calendar extends React.Component {
     var date = this.props.date;
     return (
       <div className="container">
+        <h2 className="title"> Welcome To SoulFood</h2>
         <table className="table">
           <caption>
-            <button className="left"
+            <button className="button left"
               onClick={this.prevMonth}>prev</button>
-            <button className="right"
+            <button className="button right"
               onClick={this.nextMonth}>next</button>
             <span className="clickable"
               onClick={this.jumpToToday}>
@@ -75,21 +77,25 @@ export default class Calendar extends React.Component {
             events={events}
             />
         </table>
-        <button className="searchRestaurants"
+        <button className="button search left"
           onClick={this.searchRestaurants}>Search Restaurants</button>
-        <button className="searchRecipes"
+        <button className="button search right"
           onClick={this.searchRecipes}>Search Recipes</button>
-        {this.state.adding &&
+        {this.state.form &&
           <AddEventForm
             store={store}
             date={this.state.adding}
           />
         }
         {this.state.restoSearch &&
-          <SearchYelp/>
+          <SearchYelp
+            date={this.state.adding}
+          />
         }
         {this.state.recipeSearch &&
-          <SearchRecipe/>
+          <SearchRecipe
+            date={this.state.adding}
+          />
         }
       </div>
     )

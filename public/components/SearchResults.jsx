@@ -9,7 +9,13 @@ export default class SearchResults extends React.Component {
     return (
       <ul>
         {searchResults && searchResults.map(function(item){
-          return <li><a href={item.url}>{item.name}</a></li>
+          return <li><a href={item.url}>{item.name}</a>
+            <div className="addToCal">
+              <button class="btn" type="button">
+               Add To Calendar
+              </button>
+            </div>
+          </li>
         })}
       </ul>
     )

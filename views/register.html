@@ -1,9 +1,24 @@
-<h1>Register For SoulFood</h1>
-<form method="post">
-  <p>Username<br>
-  <input type="text" name="username"></p>
-  <p>Password<br>
-  <input type="password" name="password"></p>
-  <p><input type="submit"></p>
-</form>
-<a href="/login">Login</a>
+<html>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <div class="form">
+    <h1>Register</h1>
+    <form method="post">
+      <div class="field-wrap">
+        <label for="inputUsername" class="input-field">
+          Username
+        <span class="req">*</span>
+        </label>
+      <input type="text" name="username"></p>
+      </div>
+      <div class="field-wrap">
+        <label for="inputPassword" class="input-field">
+          Password
+        <span class="req">*</span>
+        </label>
+        <input type="password" name="password"></p>
+      </div>
+      <p><input class="button button-block" type="submit"></p>
+    </form>
+    <button class="back button-block" onclick="window.history.back()">Back</button>
+  </div>
+</html>

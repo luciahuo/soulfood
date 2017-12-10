@@ -6,16 +6,14 @@ import SearchResults from './SearchResults';
 export default class SearchYelp extends React.Component {
   constructor(props) {
     super();
-    var that = this;
     // state for keeping track of search results
     this.state = {
       searchText: '',
       searchResults: []
     }
-    $.get('/restaurantKey', function (data) {
-      that.apiKey = data.key;
-    });
-    this.zomato = new zomato(this.apiKey);
+    $.get('/restaurantKey', (function (data) {
+      this.zomato = new zomato(data.key.trim());
+    }).bind(this));
     this.submitForm = this.submitForm.bind(this);
     this.cancel = this.cancel.bind(this);
   }
@@ -60,11 +58,14 @@ export default class SearchYelp extends React.Component {
             onSubmit={this.submitForm}
           >
           <p className="form-title">
-            Search Restaurants Near You
+            Search Restaurants Near You For This Date: 
+          </p>
+          <p className="form-title">
+            {this.props.date.format('ddd D MMM YYYY')}
           </p>
           <label>
             Keyword
-            <input type="text" id="keyword"/>
+            <input style={{fontSize: '18px', width: '100%', background: 'none'}} type="text" id="keyword"/>
           </label>
           <div className="form-controls">
             <button type="submit" id="submit">Search Restaurants</button>

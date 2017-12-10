@@ -1,0 +1,258 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+html {
+  overflow-y: scroll;
+}
+body {
+  font-family: monospace;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #c1bdba;
+}
+.form {
+  background: rgba(19, 35, 47, 0.9);
+  padding: 40px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+.tab-group {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+.tab-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tab-group li a {
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: rgba(160, 179, 176, 0.25);
+  color: #a0b3b0;
+  font-size: 20px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+.tab-group li a:hover {
+  background: #179b77;
+  color: #ffffff;
+}
+.tab-group .active a {
+  background: #1ab188;
+  color: #ffffff;
+}
+h1 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 300;
+  margin: 0 0 40px;
+}
+.field-wrap label {
+  position: absolute;
+  -webkit-transform: translateY(6px);
+          transform: translateY(6px);
+  left: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  font-size: 22px;
+}
+.field-wrap label .req {
+  margin: 2px;
+  color: #1ab188;
+}
+.field-wrap label.active {
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
+  left: 2px;
+  font-size: 14px;
+}
+.field-wrap label.active .req {
+  opacity: 0;
+}
+.field-wrap label.highlight {
+  color: #ffffff;
+}
+.field-wrap input, textarea {
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: #ffffff;
+  border-radius: 0;
+  -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.field-wrap input:focus, textarea:focus {
+  outline: 0;
+  border-color: #1ab188;
+}
+.field-wrap textarea {
+  border: 2px solid #a0b3b0;
+  resize: vertical;
+}
+.field-wrap {
+  position: relative;
+  margin-bottom: 40px;
+}
+.button {
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  background: #1ab188;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+.button:hover, .button:focus {
+  background: #179b77;
+}
+.button-block {
+  display: block;
+  width: 100%;
+}
+.back {
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  background: #8edbfe;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+.back:hover, .back:focus {
+  background: #6bc9f4;
+}
+.logout {
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+  border: 1px solid black;
+}
+.table {
+    border-collapse: collapse;
+}
+.table caption {
+    font-size: 1.5rem;
+    padding: 10px;
+}
+.table button {
+    font-size: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    cursor: pointer;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.clickable {
+    cursor: pointer;
+}
+.table th {
+    border: 1px solid black;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px;
+}
+.table td {
+    border: 1px solid black;
+    padding: 5px;
+    height: 75px;
+    width: 75px;
+    vertical-align: top;
+}
+.table td.today {
+    border-color: darkred;
+    border-width: 2px;
+    font-weight: bold;
+    color: darkred;
+    padding: 4px;
+}
+.search {
+  font-size: 0.5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+.container {
+    padding-left: 300px;
+    padding-right: 100px;
+    max-width: 900px;
+    position: relative;
+}
+.add-event-form {
+    margin: 50px auto;
+    padding: 10px;
+    width: 50%;
+    display: block;
+    background: #fff;
+    border: 1px solid #333;
+}
+.form-title {
+    text-align: center;
+}
+.add-event-form label {
+    display: block;
+    clear: right;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.add-event-form input,
+.add-event-form select {
+    width: 60%;
+    float: right;
+}
+.form-controls {
+    margin-top: 20px;
+    text-align: center;
+}
+.form-controls button {
+    margin: 0 5px;
+    padding: 5px;
+}
+.error {
+    color: darkred;
+}
+.title {
+  font-size: 30px;
+  font-family: monospace;
+  text-align: center;
+  display: block;
+  margin: auto;
+}
+.btn {
+  font-size: 12px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: none;
+  padding: 3px;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #aeadac;
+}
