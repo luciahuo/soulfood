@@ -24,6 +24,13 @@ const addEvent = (date, eventInfo, store) => {
   };
 };
 
+const addEventForm = (date) => {
+  return {
+    type: 'ADDEVENTFORM',
+    date: date
+  }
+}
+
 const removeEvent = (eventName) => {
   return {
     type: 'REMOVEEVENT',
@@ -51,4 +58,4 @@ const searchRecipes = (date) => {
   }
 }
 
-export { changeDate, selectDay, addEvent, removeEvent, closeForm, searchRestaurants, searchRecipes};
+export { addEventForm, changeDate, selectDay, addEvent, removeEvent, closeForm, searchRestaurants, searchRecipes};

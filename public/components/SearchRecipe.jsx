@@ -1,5 +1,6 @@
 import React from 'react';
 import querystring from 'querystring'
+import SearchResults from './SearchResults';
 
 export default class SearchRecipe extends React.Component {
   constructor(props) {
@@ -21,22 +22,33 @@ export default class SearchRecipe extends React.Component {
   submitForm(e) {
     e.preventDefault();
     var ingredients = $('#ingredients').val();
+    var healthlabel = $('#diet').val();
+    var q = '';
     if (!ingredients) {
       alert('please enter ingredients');
     } else {
+      var that = this;
       ingredients = ingredients.split(" ");
       // construct the querystring
-      var q = buildQuery(ingredients);
+      q = buildQuery(ingredients);
       var data = {
         q: q,
         app_id: this.recipeId,
         app_key: this.recipeKey
       }
+      if (healthlabel != "none") {
+        data = {
+          q: q,
+          health: healthlabel,
+          app_id: this.recipeId,
+          app_key: this.recipeKey
+        }
+      }
       $.get(
         'https://api.edamam.com/search',
         data
       ).done(function (data) {
-        console.log(data);
+        that.setState({searchResults: data});
       });
     }
   }
@@ -44,14 +56,17 @@ export default class SearchRecipe extends React.Component {
 
   }
   render() {
-    var results = this.state.searchResults;
+    var results = this.state.searchResults.hits;
     return (
       <div className="searchRecipes">
         <form className="search_recipe_form"
           onSubmit={this.submitForm}
           >
           <p className="form-title">
-            Search Recipes
+            Search Recipes For This Date:
+          </p>
+          <p className="form-title">
+            {this.props.date.format('ddd D MMM YYYY')}
           </p>
           <label>
             Ingredients
@@ -64,6 +79,7 @@ export default class SearchRecipe extends React.Component {
           <label>
             Diet
             <select id="diet">
+              <option value="none">None</option>
               <option value="vegan">Vegan</option>
               <option value="vegetarian">Vegetarian</option>
               <option value="pescatarian">Pescatarian</option>
@@ -77,21 +93,22 @@ export default class SearchRecipe extends React.Component {
             <button onClick={this.cancel}>Cancel</button>
           </div>
         </form>
+          {results && <SearchResults searchType="recipe" searchResults={results}/>}
       </div>
     )
   }
 }
 
 const buildQuery = (array) => {
-  var length = array.length;
-  var string = array[0];
-  while (length != 1) {
-    string = string + '%26' + array[i];
-    length -= 1;
+  var index = array.length - 1;
+  var string = array[index];
+  if (array.length == 1) {
+    return string;
   }
-  if (array.length != 1) {
-    // append the last character
-    string = string + array[array.length - 1];
+  while (index != 1) {
+    index -= 1;
+    string = string + '&' + array[index];
   }
+  string = string + '&' + array[0];
   return string;
 }

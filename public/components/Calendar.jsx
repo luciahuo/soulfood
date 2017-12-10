@@ -18,6 +18,7 @@ export default class Calendar extends React.Component {
     this.nextMonth = this.nextMonth.bind(this);
     this.searchRestaurants = this.searchRestaurants.bind(this);
     this.searchRecipes = this.searchRecipes.bind(this);
+    this.addEventForm = this.addEventForm.bind(this);
   }
   componentDidMount() {
     // rerender the component whenever there is a change to the state of the page
@@ -44,6 +45,9 @@ export default class Calendar extends React.Component {
     // pass in the store
     var store = this.props.store;
     this.props.store.dispatch(actions.changeDate(nextMonth, store));
+  }
+  addEventForm() {
+    this.props.store.dispatch(actions.addEventForm(this.props.date));
   }
   searchRestaurants() {
     this.props.store.dispatch(actions.searchRestaurants(this.props.date));
@@ -79,6 +83,8 @@ export default class Calendar extends React.Component {
         </table>
         <button className="button search left"
           onClick={this.searchRestaurants}>Search Restaurants</button>
+        <button className="button search mid"
+          onClick={this.addEventForm}>Add Event</button>
         <button className="button search right"
           onClick={this.searchRecipes}>Search Recipes</button>
         {this.state.form &&

@@ -35,6 +35,12 @@ const mainReducer = (state, action) => {
       redraw(state, store);
     }
 
+    // add the event form to the page
+    case 'ADDEVENTFORM': {
+      var date = action.date;
+      return _.assign({}, state, {adding: date, form: true, recipeSearch: false, restoSearch: false});
+    }
+
     // remove an event
     case 'REMOVEEVENT': {
 

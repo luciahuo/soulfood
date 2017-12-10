@@ -51,14 +51,14 @@ export default class SearchYelp extends React.Component {
 
   }
   render() {
-    var results = this.state.searchResults;
+    var results = this.state.searchResults.restaurants;
     return (
       <div className="searchResto">
         <form className="search_restaurant_form"
             onSubmit={this.submitForm}
           >
           <p className="form-title">
-            Search Restaurants Near You For This Date: 
+            Search Restaurants Near You For This Date:
           </p>
           <p className="form-title">
             {this.props.date.format('ddd D MMM YYYY')}
@@ -72,7 +72,9 @@ export default class SearchYelp extends React.Component {
             <button onClick={this.cancel}>Cancel</button>
           </div>
         </form>
-        <SearchResults searchResults={results}/>
+        {
+          results && <SearchResults searchType="restaurant" searchResults={results}/>
+        }
       </div>
     );
   }

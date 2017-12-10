@@ -169,6 +169,10 @@ h1 {
 .right {
     float: right;
 }
+.mid {
+    position: absolute;
+    right: 300px;
+}
 .clickable {
     cursor: pointer;
 }
@@ -255,4 +259,13 @@ h1 {
 }
 .btn:hover {
   background: #aeadac;
+}
+.search_restaurant_form {
+  margin-top: 50px;
+}
+.add_event-form {
+  margin-top: 50px;
+}
+.search_recipe_form {
+  margin-top: 50px;
 }
