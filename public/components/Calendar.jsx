@@ -87,6 +87,8 @@ export default class Calendar extends React.Component {
           onClick={this.addEventForm}>Add Event</button>
         <button className="button search right"
           onClick={this.searchRecipes}>Search Recipes</button>
+        <div id="popup">
+        </div>
         {this.state.form &&
           <AddEventForm
             store={store}
@@ -95,11 +97,13 @@ export default class Calendar extends React.Component {
         }
         {this.state.restoSearch &&
           <SearchYelp
+            store={store}
             date={this.state.adding}
           />
         }
         {this.state.recipeSearch &&
           <SearchRecipe
+            store={store}
             date={this.state.adding}
           />
         }

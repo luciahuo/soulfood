@@ -59,6 +59,7 @@
     "react-addons-test-utils": "*",
     "react-addons-update": "*",
     "react-dom": "*",
+    "react-popup": "^0.8.0",
     "react-redux": "*",
     "reactify": "*",
     "redux": "*",

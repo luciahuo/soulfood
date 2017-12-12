@@ -52,6 +52,7 @@ export default class SearchYelp extends React.Component {
   }
   render() {
     var results = this.state.searchResults.restaurants;
+    var store = this.props.store;
     return (
       <div className="searchResto">
         <form className="search_restaurant_form"
@@ -73,7 +74,7 @@ export default class SearchYelp extends React.Component {
           </div>
         </form>
         {
-          results && <SearchResults searchType="restaurant" searchResults={results}/>
+          results && <SearchResults store={store} date={this.props.date} searchType="restaurant" searchResults={results}/>
         }
       </div>
     );

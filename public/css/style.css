@@ -10,6 +10,12 @@ body {
   padding-bottom: 40px;
   background-color: #c1bdba;
 }
+.mm-popup{
+  margin-top: 30px;
+}
+.searchResto {
+  float: left;
+}
 .form {
   background: rgba(19, 35, 47, 0.9);
   padding: 40px;

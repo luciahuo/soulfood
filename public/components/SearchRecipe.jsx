@@ -51,6 +51,11 @@ export default class SearchRecipe extends React.Component {
         that.setState({searchResults: data});
       });
     }
+    ReactDom.render(
+      <Popup
+        className="mm-popup"/>,
+        document.getElementById('popup')
+    )
   }
   cancel() {
 
@@ -70,11 +75,7 @@ export default class SearchRecipe extends React.Component {
           </p>
           <label>
             Ingredients
-            <input style={{fontSize: '18px', width: '100%', background: 'none'}} type="text" id="ingredients"/>
-          </label>
-          <label>
-            Max Number of Ingredients
-            <input style={{fontSize: '18px', width: '100%', background: 'none'}} type="number" id="maxNumIngredients"/>
+            <input style={{fontSize: '18px', width: '100%', background: 'none'}} type="text" id="ingredients" placeholder="input list of ingredients separated by space"/>
           </label>
           <label>
             Diet
@@ -93,7 +94,7 @@ export default class SearchRecipe extends React.Component {
             <button onClick={this.cancel}>Cancel</button>
           </div>
         </form>
-          {results && <SearchResults searchType="recipe" searchResults={results}/>}
+          {results && <SearchResults store={this.props.store} date={this.props.date} searchType="recipe" searchResults={results}/>}
       </div>
     )
   }
